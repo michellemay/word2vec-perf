@@ -26,10 +26,8 @@ Alpha: 0.047401  Progress: 5.20%  Words/thread/sec: 1301.62k
 ...
 Alpha: 0.037308  Progress: 25.39%  Words/thread/sec: 1329.74k
 ```
-As seen in the logs, speed is should be 16 threads * 1329.74k ~= **21275** kwords/s.
-However, this number does not add up with percentages and total number of words!
-
-More realistic timing is: 5% * 129756040 words takes about 47 seconds ~= **138 kwords/s**
+As seen in the logs, speed is **1330 kwords/s**
+*Note, word2vec seems to be running all iterations in the same progress bar.*
 
 # gensim
 Running python 2.7 on Anaconda (gensim 0.13.3)
@@ -55,11 +53,11 @@ Sample output:
 2016-10-26 15:05:46,543 : INFO : PROGRESS: at 26.08% examples, 102286 words/s, in_qsize 0, out_qsize 0
 ...
 2016-10-26 15:45:09,621 : INFO : PROGRESS: at 52.53% examples, 103708 words/s, in_qsize 0, out_qsize 0
+...
+2016-10-26 16:22:48,619 : INFO : PROGRESS: at 77.75% examples, 104303 words/s, in_qsize 0, out_qsize 1
 ~~~~
 
-As seen in the logs, speed is **103 kwords/s**. However, this does not add up.
-According to percentages, this should be 5% * 129347859 words takes about 460 seconds ~= **14 kwords/s**
-
+As seen in the logs, speed is **104 kwords/s**.
 
 # Spark
 Running Spark 2.0.1: `spark-shell.cmd --master local[16] --driver-memory 20G`
@@ -82,10 +80,10 @@ Approximate speed is 16 threads * 3208 w/s ~= **51 kwords/s**
 
 # Results
 
-|          | kwords/s | total time | total words |
-| ---      | ---:     | ---:       | ---:        |
-|word2vec  | 138      |            | 129756040   | * unfair advange of data being already in memory
-|gensim    | 14       |            | 129347859   |
-|spark     | 51       |            | 138847698   |
+|          | kwords/s | training time | total words |
+| ---      | ---:     | ---:          | ---:        |
+|word2vec  | 1330     | 16:20         | 129756040   | * unfair advange of data being already in memory
+|gensim    | 104      |               | 129347859   |
+|spark     | 51       |               | 138847698   |
 
 ** Interesting to see that none of the tools sees the same number of words with spark being way out!**
