@@ -55,9 +55,12 @@ Sample output:
 2016-10-26 15:45:09,621 : INFO : PROGRESS: at 52.53% examples, 103708 words/s, in_qsize 0, out_qsize 0
 ...
 2016-10-26 16:22:48,619 : INFO : PROGRESS: at 77.75% examples, 104303 words/s, in_qsize 0, out_qsize 1
+...
+2016-10-26 16:55:01,194 : INFO : PROGRESS: at 99.98% examples, 104921 words/s, in_qsize 0, out_qsize 0
+2016-10-26 16:55:01,990 : INFO : training on 1293478590 raw words (946227620 effective words) took 9018.1s, 104926 effective words/s
 ~~~~
 
-As seen in the logs, speed is **104 kwords/s**.
+As seen in the logs, speed is **104 kwords/s**.  (946227620 effective words after downsampling and multiple iterations)
 
 # Spark
 Running Spark 2.0.1: `spark-shell.cmd --master local[16] --driver-memory 20G`
