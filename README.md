@@ -8,25 +8,12 @@ Compare words/s for spark, gensim and original word2vec.
 # Dataset
 http://mattmahoney.net/dc/enwik9.zip
 
-# Spark
-Running Spark 2.0.1: `spark-shell.cmd --master local[16] --driver-memory 20G`
+# word2vec
+Running: `word2vec -threads 16 -train enwik9 -iter 10 -min-count 10 -output testvecs.txt --cbow 0`
 
-Sample output:
-~~~~
-16/10/26 15:08:09 INFO Word2Vec: vocabSize = 458191, trainWordsCount = 138847698
-16/10/26 15:10:06 INFO Word2Vec: wordCount = 10018, alpha = 0.024971139600952263  // (similar line repeated 16 times)
-...
-16/10/26 15:15:18 INFO Word2Vec: wordCount = 993069, alpha = 0.022139112834703874
-16/10/26 15:15:18 INFO Word2Vec: wordCount = 1004216, alpha = 0.02210699995107589
-16/10/26 15:15:18 INFO Word2Vec: wordCount = 1003880, alpha = 0.022107967918143175
-16/10/26 15:15:19 INFO Word2Vec: wordCount = 1003081, alpha = 0.02211026972078234
-16/10/26 15:15:19 INFO Word2Vec: wordCount = 993076, alpha = 0.022139092668723305
-~~~~
+```
+```
 
-Interesting to see that gensim and spark does not see the same number of words!
-Since I'm using with 16 partitions, each one sees about 8.7M words.
-
-Approximate speed is 16 threads * 3208 w/s ~= *51 kwords/s*
 
 # gensim
 Running python 2.7 on Anaconda (gensim 0.13.3)
@@ -53,3 +40,31 @@ Sample output:
 ~~~~
 
 As seen in the logs, speed is *102 kwords/s*
+
+
+# Spark
+Running Spark 2.0.1: `spark-shell.cmd --master local[16] --driver-memory 20G`
+
+Sample output:
+~~~~
+16/10/26 15:08:09 INFO Word2Vec: vocabSize = 458191, trainWordsCount = 138847698
+16/10/26 15:10:06 INFO Word2Vec: wordCount = 10018, alpha = 0.024971139600952263
+...
+16/10/26 15:15:18 INFO Word2Vec: wordCount = 993069, alpha = 0.022139112834703874
+16/10/26 15:15:18 INFO Word2Vec: wordCount = 1004216, alpha = 0.02210699995107589
+16/10/26 15:15:18 INFO Word2Vec: wordCount = 1003880, alpha = 0.022107967918143175
+16/10/26 15:15:19 INFO Word2Vec: wordCount = 1003081, alpha = 0.02211026972078234
+16/10/26 15:15:19 INFO Word2Vec: wordCount = 993076, alpha = 0.022139092668723305
+~~~~
+
+Interesting to see that gensim and spark does not see the same number of words!
+Since I'm using with 16 partitions, each one sees about 8.7M words.
+
+Approximate speed is 16 threads * 3208 w/s ~= *51 kwords/s*
+
+# Results
+
+|                  | kwords/s | total time |
+|original word2vec |          |            |
+|gensim            | 102      |            |
+|spark             | 51       |            |
