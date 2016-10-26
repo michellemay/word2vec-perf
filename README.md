@@ -39,7 +39,7 @@ Sample output:
 2016-10-26 15:05:46,543 : INFO : PROGRESS: at 26.08% examples, 102286 words/s, in_qsize 0, out_qsize 0
 ~~~~
 
-As seen in the logs, speed is *102 kwords/s*
+As seen in the logs, speed is **102 kwords/s**
 
 
 # Spark
@@ -60,12 +60,12 @@ Sample output:
 Interesting to see that gensim and spark does not see the same number of words!
 Since I'm using with 16 partitions, each one sees about 8.7M words.
 
-Approximate speed is 16 threads * 3208 w/s ~= *51 kwords/s*
+Approximate speed is 16 threads * 3208 w/s ~= **51 kwords/s**
 
 # Results
 
-|                  | kwords/s | total time |
-| --- | --- | ---|
-|original word2vec |          |            |
-|gensim            | 102      |            |
-|spark             | 51       |            |
+|          | kwords/s | total time |
+| ---      | ---:     | ---:       |
+|word2vec  |          |            |
+|gensim    | 102      |            |
+|spark     | 51       |            |
