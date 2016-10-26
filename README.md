@@ -13,12 +13,20 @@ Running Spark 2.0.1: `spark-shell.cmd --master local[16] --driver-memory 20G`
 
 Sample output:
 ~~~~
-16/10/26 14:10:08 INFO Word2Vec: wordCount = 10023, alpha = 0.02495488311981317
+16/10/26 15:08:09 INFO Word2Vec: vocabSize = 458191, trainWordsCount = 138847698
+16/10/26 15:10:06 INFO Word2Vec: wordCount = 10018, alpha = 0.024971139600952263  // (similar line repeated 16 times)
 ...
-16/10/26 14:14:08 INFO Word2Vec: wordCount = 1003170, alpha = 0.020484395819912005
-...
-16/10/26 14:34:59 INFO Word2Vec: wordCount = 5565869, alpha = 2.5E-6
+16/10/26 15:15:18 INFO Word2Vec: wordCount = 993069, alpha = 0.022139112834703874
+16/10/26 15:15:18 INFO Word2Vec: wordCount = 1004216, alpha = 0.02210699995107589
+16/10/26 15:15:18 INFO Word2Vec: wordCount = 1003880, alpha = 0.022107967918143175
+16/10/26 15:15:19 INFO Word2Vec: wordCount = 1003081, alpha = 0.02211026972078234
+16/10/26 15:15:19 INFO Word2Vec: wordCount = 993076, alpha = 0.022139092668723305
 ~~~~
+
+Interesting to see that gensim and spark does not see the same number of words!
+Since I'm using with 16 partitions, each one sees about 8.7M words.
+
+Approximate speed is 16 threads * 3208 w/s ~= *51 kwords/s*
 
 # gensim
 Running python 2.7 on Anaconda (gensim 0.13.3)
@@ -38,13 +46,10 @@ Sample output:
 2016-10-26 14:24:44,115 : INFO : expecting 13147026 sentences, matching count from corpus used for vocabulary survey
 2016-10-26 14:24:45,427 : INFO : PROGRESS: at 0.00% examples, 5933 words/s, in_qsize 24, out_qsize 0
 2016-10-26 14:24:46,569 : INFO : PROGRESS: at 0.01% examples, 61154 words/s, in_qsize 14, out_qsize 1
-2016-10-26 14:24:47,568 : INFO : PROGRESS: at 0.02% examples, 76068 words/s, in_qsize 10, out_qsize 0
-2016-10-26 14:24:48,608 : INFO : PROGRESS: at 0.03% examples, 80037 words/s, in_qsize 13, out_qsize 2
-2016-10-26 14:24:49,691 : INFO : PROGRESS: at 0.04% examples, 84316 words/s, in_qsize 5, out_qsize 1
-2016-10-26 14:24:50,667 : INFO : PROGRESS: at 0.05% examples, 85619 words/s, in_qsize 0, out_qsize 1
-2016-10-26 14:24:52,029 : INFO : PROGRESS: at 0.06% examples, 86184 words/s, in_qsize 0, out_qsize 0
-2016-10-26 14:24:53,124 : INFO : PROGRESS: at 0.07% examples, 88264 words/s, in_qsize 0, out_qsize 0
-2016-10-26 14:24:54,104 : INFO : PROGRESS: at 0.08% examples, 90871 words/s, in_qsize 0, out_qsize 0
 ...
 2016-10-26 14:44:29,252 : INFO : PROGRESS: at 12.37% examples, 101454 words/s, in_qsize 0, out_qsize 0
+...
+2016-10-26 15:05:46,543 : INFO : PROGRESS: at 26.08% examples, 102286 words/s, in_qsize 0, out_qsize 0
 ~~~~
+
+As seen in the logs, speed is *102 kwords/s*
