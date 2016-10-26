@@ -65,6 +65,7 @@ Approximate speed is 16 threads * 3208 w/s ~= *51 kwords/s*
 # Results
 
 |                  | kwords/s | total time |
+| --- | --- | ---|
 |original word2vec |          |            |
 |gensim            | 102      |            |
 |spark             | 51       |            |
