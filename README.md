@@ -34,6 +34,10 @@ Running python 2.7 on Anaconda (gensim 0.13.3)
 
 Sample output:
 ~~~~
+2016-10-26 14:17:59,470 : INFO : collecting all words and their counts
+2016-10-26 14:17:59,471 : INFO : PROGRESS: at sentence #0, processed 0 words, keeping 0 word types
+2016-10-26 14:17:59,586 : INFO : PROGRESS: at sentence #10000, processed 113372 words, keeping 31659 word types
+...
 2016-10-26 14:23:35,756 : INFO : collected 8859143 word types from a corpus of 129347859 raw words and 13147026 sentences
 2016-10-26 14:23:35,756 : INFO : Loading a fresh vocabulary
 2016-10-26 14:24:12,579 : INFO : min_count=10 retains 458259 unique words (5% of original 8859143, drops 8400884)
@@ -63,23 +67,26 @@ Sample output:
 As seen in the logs, speed is **104 kwords/s**.  (946227620 effective words after downsampling and multiple iterations)
 
 # Spark
-Running Spark 2.0.1: `spark-shell.cmd --master local[16] --driver-memory 20G`
+Running Spark 2.0.1: `spark-shell.cmd --master local[16] --driver-memory 20G --conf spark.kryoserializer.buffer.max=1G`
 
 Sample output:
 ~~~~
-16/10/26 15:08:09 INFO Word2Vec: vocabSize = 458191, trainWordsCount = 138847698
-16/10/26 15:10:06 INFO Word2Vec: wordCount = 10018, alpha = 0.024971139600952263
+16/10/26 19:42:25 INFO Word2Vec: vocabSize = 458191, trainWordsCount = 138847698
+16/10/26 19:44:16 INFO Word2Vec: wordCount = 10016, alpha = 0.024942290725321996
+16/10/26 19:44:16 INFO Word2Vec: wordCount = 10001, alpha = 0.024942377150953002
 ...
-16/10/26 15:15:18 INFO Word2Vec: wordCount = 993069, alpha = 0.022139112834703874
-16/10/26 15:15:18 INFO Word2Vec: wordCount = 1004216, alpha = 0.02210699995107589
-16/10/26 15:15:18 INFO Word2Vec: wordCount = 1003880, alpha = 0.022107967918143175
-16/10/26 15:15:19 INFO Word2Vec: wordCount = 1003081, alpha = 0.02211026972078234
-16/10/26 15:15:19 INFO Word2Vec: wordCount = 993076, alpha = 0.022139092668723305
+16/10/26 19:48:22 INFO Word2Vec: wordCount = 1003098, alpha = 0.0192204414925162
+16/10/26 19:48:22 INFO Word2Vec: wordCount = 1003704, alpha = 0.0192169498970235
+16/10/26 19:48:22 INFO Word2Vec: wordCount = 1003059, alpha = 0.01922066619915682
+16/10/26 19:48:22 INFO Word2Vec: wordCount = 1003422, alpha = 0.01921857469888644
+16/10/26 19:48:22 INFO Word2Vec: wordCount = 1003882, alpha = 0.01921592431286888
+16/10/26 19:48:22 INFO Word2Vec: wordCount = 1003653, alpha = 0.01921724374416893
+...
 ~~~~
 
-Since I'm using with 16 partitions, each one sees about 8.7M words.
+Since I'm using with 32 partitions, each one sees about 4.3M words.
 
-Approximate speed is 16 threads * 3208 w/s ~= **51 kwords/s**
+Approximate speed is 16 threads * 4077 w/s ~= **65 kwords/s**
 
 # Results
 
@@ -87,6 +94,6 @@ Approximate speed is 16 threads * 3208 w/s ~= **51 kwords/s**
 | ---      | ---:     | ---:          | ---:        |
 |word2vec  | 1330     | 16:20         | 129756040   | * unfair advange of data being already in memory
 |gensim    | 104      |               | 129347859   |
-|spark     | 51       |               | 138847698   |
+|spark     | 65       |               | 138847698   |
 
 ** Interesting to see that none of the tools sees the same number of words with spark being way out!**
