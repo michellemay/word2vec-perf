@@ -1,9 +1,14 @@
 # word2vec-perf
-Compare words/s for spark, gensim and original word2vec.
+Compare kwords/s speed for spark, gensim and original word2vec.
 
 
 # Setup
 - Windows 7, dual opteron 6272 (2x 16 cores), 32 GB ram.
+- Settings: skipgram, window=5, iter=10, min_count=10, 16 threads
+- *I'm using only 16 threads in my tests to allow my workstation to still be responsive on daily work*
+- Time to read file is not taken into account.
+  - spark and gensim reprocess text content at each iteration. (I assume the content will eventually be bigger than memory)
+  - word2vec cache the content in memory giving it an unfair advantage over the others
 
 # Dataset
 http://mattmahoney.net/dc/enwik9.zip
