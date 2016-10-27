@@ -30,10 +30,10 @@ As seen in the logs, speed is **1330 kwords/s.**
 
 *Note, word2vec is running all the iterations in the same progress bar.*
 
-## word2vec-fast-load ##
+### word2vec-fastload ###
 Reading file and building vocabulary is unexpectedly slow here (~38m). Due to the inneficiencies of fgetc and ungetc on Windows.
 
-A modified version with simple buffering lead to significant performance gain: 35s instead of 38 minutes!
+A modified version with simple buffering leads to significant performance gain: 35s instead of 38 minutes!
 
 See word2vec.c and word2vec-fastload.exe
 
