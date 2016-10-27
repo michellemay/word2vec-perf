@@ -29,6 +29,8 @@ Alpha: 0.037308  Progress: 25.39%  Words/thread/sec: 1329.74k
 As seen in the logs, speed is **1330 kwords/s**
 *Note, word2vec seems to be running all iterations in the same progress bar.*
 
+*Reading file and building vocabulary is unexpectedly slow here. Probably due to a bad port on Windows.*
+
 # gensim
 Running python 2.7 on Anaconda (gensim 0.13.3)
 
@@ -90,10 +92,10 @@ Approximate speed is 16 threads * 4077 w/s ~= **65 kwords/s**
 
 # Results
 
-|          | kwords/s | training time | total words |
-| ---      | ---:     | ---:          | ---:        |
-|word2vec  | 1330     | 16:20         | 129756040   | * unfair advange of data being already in memory
-|gensim    | 104      |               | 129347859   |
-|spark     | 65       |               | 138847698   |
+|          | kwords/s | training time   | total words |
+| ---      | ---:     | ---:            | ---:        |
+|word2vec  | 1330     | 980s, 16m20     | 129756040   | * unfair advange of data being already in memory
+|gensim    | 104      | 9016s, 2h30m16s | 129347859   |
+|spark     | 65       |                 | 138847698   |
 
 ** Interesting to see that none of the tools sees the same number of words with spark being way out!**
