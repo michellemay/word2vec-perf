@@ -26,8 +26,9 @@ Alpha: 0.047401  Progress: 5.20%  Words/thread/sec: 1301.62k
 ...
 Alpha: 0.037308  Progress: 25.39%  Words/thread/sec: 1329.74k
 ```
-As seen in the logs, speed is **1330 kwords/s**
-*Note, word2vec seems to be running all iterations in the same progress bar.*
+As seen in the logs, speed is **1330 kwords/s.**
+
+*Note, word2vec is running all the iterations in the same progress bar.*
 
 *Reading file and building vocabulary is unexpectedly slow here. Probably due to a bad port on Windows.*
 
@@ -88,7 +89,7 @@ Sample output:
 
 Since I'm using with 32 partitions, each one sees about 4.3M words.
 
-Approximate speed is 16 threads * 4077 w/s ~= **65 kwords/s**
+Approximate [spontaneous] speed is 16 threads * 4077 w/s ~= **65 kwords/s**
 
 # Results
 
