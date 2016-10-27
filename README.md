@@ -30,7 +30,12 @@ As seen in the logs, speed is **1330 kwords/s.**
 
 *Note, word2vec is running all the iterations in the same progress bar.*
 
-*Reading file and building vocabulary is unexpectedly slow here (~38m). Probably due to a bad port on Windows.*
+## word2vec-fast-load ##
+Reading file and building vocabulary is unexpectedly slow here (~38m). Due to the inneficiencies of fgetc and ungetc on Windows.
+
+A modified version with simple buffering lead to significant performance gain: 35s instead of 38 minutes!
+
+See word2vec.c and word2vec-fastload.exe
 
 # gensim
 Running python 2.7 on Anaconda (gensim 0.13.3)
@@ -103,7 +108,7 @@ Approximate [spontaneous] speed is 16 threads * 4077 w/s ~= **65 kwords/s**
 
 |          | kwords/s | training time   | total time     | total words |
 | ---      | ---:     | ---:            | ---:           | ---:        |
-|word2vec  | 1330     | 980s (0.27h)    | 3300s (0.92h)  | 129756040   |
+|word2vec  | 1330     | 980s (0.27h)    | 1015s (0.28h)  | 129756040   |
 |gensim    | 104      | 9016s (2.50h)   | 9422s (2.62h)  | 129347859   |
 |spark     | 65       | 14424s (4.00h)  | 15428s (4.29h) | 138847698   |
 
