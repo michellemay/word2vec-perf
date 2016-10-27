@@ -30,7 +30,7 @@ As seen in the logs, speed is **1330 kwords/s.**
 
 *Note, word2vec is running all the iterations in the same progress bar.*
 
-*Reading file and building vocabulary is unexpectedly slow here. Probably due to a bad port on Windows.*
+*Reading file and building vocabulary is unexpectedly slow here (~38m). Probably due to a bad port on Windows.*
 
 # gensim
 Running python 2.7 on Anaconda (gensim 0.13.3)
@@ -75,16 +75,19 @@ Running Spark 2.0.1:
 
 Sample output:
 ~~~~
-16/10/26 19:42:25 INFO Word2Vec: vocabSize = 458191, trainWordsCount = 138847698
-16/10/26 19:44:16 INFO Word2Vec: wordCount = 10016, alpha = 0.024942290725321996
-16/10/26 19:44:16 INFO Word2Vec: wordCount = 10001, alpha = 0.024942377150953002
+16/10/26 20:38:24 INFO Word2Vec: vocabSize = 458191, trainWordsCount = 138847698
+16/10/26 20:40:09 INFO Word2Vec: wordCount = 10016, alpha = 0.024942290725321996
+16/10/26 20:40:09 INFO Word2Vec: wordCount = 10016, alpha = 0.024942290725321996
+16/10/26 20:40:09 INFO Word2Vec: wordCount = 10007, alpha = 0.0249423425807006
+16/10/26 20:40:09 INFO Word2Vec: wordCount = 10095, alpha = 0.024941835550332025
+16/10/26 20:40:09 INFO Word2Vec: wordCount = 10010, alpha = 0.0249423252955744
 ...
-16/10/26 19:48:22 INFO Word2Vec: wordCount = 1003098, alpha = 0.0192204414925162
-16/10/26 19:48:22 INFO Word2Vec: wordCount = 1003704, alpha = 0.0192169498970235
-16/10/26 19:48:22 INFO Word2Vec: wordCount = 1003059, alpha = 0.01922066619915682
-16/10/26 19:48:22 INFO Word2Vec: wordCount = 1003422, alpha = 0.01921857469888644
-16/10/26 19:48:22 INFO Word2Vec: wordCount = 1003882, alpha = 0.01921592431286888
-16/10/26 19:48:22 INFO Word2Vec: wordCount = 1003653, alpha = 0.01921724374416893
+16/10/26 20:44:16 INFO Word2Vec: wordCount = 1013061, alpha = 0.01916303758840109
+16/10/26 20:44:16 INFO Word2Vec: wordCount = 1003254, alpha = 0.019219542665953725
+16/10/26 20:44:16 INFO Word2Vec: wordCount = 1013469, alpha = 0.019160686811237688
+16/10/26 20:44:17 INFO Word2Vec: wordCount = 1014371, alpha = 0.019155489749959776
+16/10/26 20:44:17 INFO Word2Vec: wordCount = 1003549, alpha = 0.019217842961877243
+16/10/26 20:44:17 INFO Word2Vec: wordCount = 1023743, alpha = 0.019101491015706355
 ...
 ~~~~
 
