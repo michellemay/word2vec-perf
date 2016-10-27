@@ -70,7 +70,8 @@ Sample output:
 As seen in the logs, speed is **104 kwords/s**.  (946227620 effective words after downsampling and multiple iterations)
 
 # Spark
-Running Spark 2.0.1: `spark-shell.cmd --master local[16] --driver-memory 20G --conf spark.kryoserializer.buffer.max=1G`
+Running Spark 2.0.1: 
+`spark-shell.cmd --master local[16] --driver-memory 20G --conf spark.kryoserializer.buffer.max=1G  --conf spark.driver.maxResultSize=2G`
 
 Sample output:
 ~~~~
