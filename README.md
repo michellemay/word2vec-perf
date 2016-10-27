@@ -75,6 +75,7 @@ Running Spark 2.0.1:
 
 Sample output:
 ~~~~
+Start at 20:37:00
 16/10/26 20:38:24 INFO Word2Vec: vocabSize = 458191, trainWordsCount = 138847698
 16/10/26 20:40:09 INFO Word2Vec: wordCount = 10016, alpha = 0.024942290725321996
 16/10/26 20:40:09 INFO Word2Vec: wordCount = 10016, alpha = 0.024942290725321996
@@ -89,6 +90,9 @@ Sample output:
 16/10/26 20:44:17 INFO Word2Vec: wordCount = 1003549, alpha = 0.019217842961877243
 16/10/26 20:44:17 INFO Word2Vec: wordCount = 1023743, alpha = 0.019101491015706355
 ...
+16/10/27 00:38:48 INFO Word2Vec: wordCount = 4334069, alpha = 2.8356789693720352E-5
+model: org.apache.spark.mllib.feature.Word2VecModel = org.apache.spark.mllib.feature.Word2VecModel@778e3cfb
+Done at 00:54:08
 ~~~~
 
 Since I'm using with 32 partitions, each one sees about 4.3M words.
@@ -97,10 +101,10 @@ Approximate [spontaneous] speed is 16 threads * 4077 w/s ~= **65 kwords/s**
 
 # Results
 
-|          | kwords/s | training time   | total words |
-| ---      | ---:     | ---:            | ---:        |
-|word2vec  | 1330     | 980s, 16m20     | 129756040   | * unfair advange of data being already in memory
-|gensim    | 104      | 9016s, 2h30m16s | 129347859   |
-|spark     | 65       |                 | 138847698   |
+|          | kwords/s | training time   | total time     | total words |
+| ---      | ---:     | ---:            | ---:           | ---:        |
+|word2vec  | 1330     | 980s (0.27h)    | 3300s (0.92h)  | 129756040   |
+|gensim    | 104      | 9016s (2.50h)   | 9422s (2.62h)  | 129347859   |
+|spark     | 65       | 14424s (4.00h)  | 15428s (4.29h) | 138847698   |
 
 ** Interesting to see that none of the tools sees the same number of words with spark being way out!**
