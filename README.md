@@ -7,10 +7,6 @@ Compare kwords/s speed for spark, gensim and original word2vec. (Quick and dirty
   - NOT using GPU
   - *I'm using only 16 threads in my tests to allow my workstation to still be responsive.*
 - Settings: skipgram, window=5, iter=10, min_count=10, 16 threads
-- Time to read file is not taken into account.
-  - spark and gensim reprocess text content at each iteration. (I assume the content will eventually be bigger than memory)
-  - spark takes about 13 GB of memory to cache enwik9 content in RDD (!!!)
-  - word2vec cache the content in memory giving it an unfair advantage over the others.
 
 # Dataset
 http://mattmahoney.net/dc/enwik9.zip
