@@ -26,6 +26,8 @@ As seen in the logs, speed is **1330 kwords/s.**
 
 *Note, word2vec is running all the iterations in the same progress bar.*
 
+Thread safety: word2vec original implementation intentionnaly ignores thread safety and locking of shared resources.  More particularly, it has race conditions when updating syn0 and syn1 weights matrices. It's defendable in the sense that updates are small and forgetting some along the way is akin of introducing small noise. See [this](https://groups.google.com/forum/#!topic/word2vec-toolkit/iDTvPEOgFD0) comment.  It can result in an unfair performance advantage over the other implementations.
+
 ### word2vec-fastload ###
 Reading file and building vocabulary is unexpectedly slow here (~38m). Due to the inneficiencies of fgetc and ungetc on Windows.
 
